@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Modern Radio UI Player</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		/>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body class="dark-mode">
+		<div class="app-mockup" id="app-wrapper">
+			<div class="screen screen-left" id="screen-l">
+				<div class="left-header-row">
+					<div class="left-header-side">
+						<button
+							id="open-player-btn"
+							class="open-player-btn"
+							title="Открыть плеер"
+							aria-label="Открыть плеер"
+						>
+							<i class="fa-solid fa-chevron-up"></i>
+						</button>
+					</div>
+					<h2>Playlists</h2>
+					<div class="left-header-side-right">
+						<button
+							id="theme-toggle-btn"
+							class="theme-toggle-btn"
+							title="Сменить тему"
+							aria-label="Сменить тему"
+						>
+							<i id="theme-icon" class="fa-solid fa-sun"></i>
+						</button>
+					</div>
+				</div>
+
+				<div id="mood-banner" class="mood-banner">
+					<div class="banner-top-row">
+						<div class="banner-status-block">
+							<span id="banner-status" class="mood-title">Mood</span>
+							<i
+								id="stream-status-icon"
+								class="fa-solid fa-wifi stream-icon-good"
+							></i>
+						</div>
+						<span id="banner-quality" class="quality-badge hidden"
+							>... kbps</span
+						>
+					</div>
+
+					<div class="mood-content">
+						<span id="banner-station-name" class="mood-sub">Ожидание...</span>
+						<span id="banner-clicks" class="banner-popularity hidden">
+							<i class="fa-solid fa-fire"></i> 0
+						</span>
+					</div>
+
+					<div class="banner-bottom-bar">
+						<button
+							id="banner-play-btn"
+							class="banner-play-btn"
+							aria-label="Воспроизведение"
+						>
+							<i id="banner-play-icon" class="fa-solid fa-play"></i>
+						</button>
+
+						<div id="visualizer" class="visualizer hidden">
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+						</div>
+
+						<div id="banner-actions" class="banner-actions hidden">
+							<button
+								id="banner-like-btn"
+								class="icon-btn banner-action-icon"
+								aria-label="Добавить в избранное"
+							>
+								<i class="fa-solid fa-heart"></i>
+							</button>
+							<button
+								id="banner-share-btn"
+								class="icon-btn banner-action-icon"
+								aria-label="Поделиться станцией"
+							>
+								<i class="fa-solid fa-share-nodes"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="genre-tabs-container" id="genre-tabs-container">
+					<div class="genre-tabs">
+						<button class="tab-btn active" data-genre="pop">Pop</button>
+						<button class="tab-btn" data-genre="dance">Dance</button>
+						<button class="tab-btn" data-genre="techno">Techno</button>
+						<button class="tab-btn" data-genre="house">House</button>
+						<button class="tab-btn" data-genre="trance">Trance</button>
+						<button class="tab-btn" data-genre="dnb">D&B</button>
+						<button class="tab-btn" data-genre="lofi">Lofi</button>
+						<button class="tab-btn" data-genre="ambient">Ambient</button>
+						<button class="tab-btn" data-genre="country">Country</button>
+						<button class="tab-btn" data-genre="russian">Russian</button>
+						<button class="tab-btn" data-genre="favorites">
+							<i class="fa-solid fa-heart" draggable="false"></i> Favorites
+						</button>
+					</div>
+				</div>
+
+				<div class="live-indicator">
+					<span id="live-dot" class="dot"></span> Live Stations
+				</div>
+
+				<div class="playlist-wrapper">
+					<div id="loader" class="loader hidden">
+						<div class="spinner"></div>
+						<span>Загрузка безопасных станций...</span>
+					</div>
+					<ul id="playlist"></ul>
+				</div>
+
+				<div id="mini-player" class="mini-player">
+					<img
+						id="mini-logo"
+						src="https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=150&auto=format&fit=crop&q=60"
+						alt="Logo"
+						draggable="false"
+					/>
+					<div
+						class="mini-info"
+						id="mini-info-trigger"
+						role="button"
+						tabindex="0"
+					>
+						<div id="mini-name" class="mini-name">Выберите станцию</div>
+						<div id="mini-genre" class="mini-genre">Жанр</div>
+					</div>
+					<div class="mini-controls">
+						<button
+							id="mini-prev-btn"
+							class="icon-btn"
+							aria-label="Предыдущая станция"
+						>
+							<i class="fa-solid fa-backward-step"></i>
+						</button>
+						<button
+							id="mini-play-btn"
+							class="icon-btn"
+							aria-label="Воспроизведение"
+						>
+							<i class="fa-solid fa-play"></i>
+						</button>
+						<button
+							id="mini-next-btn"
+							class="icon-btn"
+							aria-label="Следующая станция"
+						>
+							<i class="fa-solid fa-forward-step"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="screen screen-right" id="screen-r">
+				<button
+					id="back-to-list-btn"
+					class="back-btn-container"
+					title="Свернуть плеер"
+					aria-label="Свернуть плеер"
+				>
+					<i class="fa-solid fa-chevron-down back-icon"></i>
+				</button>
+
+				<div class="main-cover-container">
+					<img
+						id="main-logo"
+						src="https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=500&auto=format&fit=crop&q=80"
+						alt="Cover"
+						draggable="false"
+					/>
+				</div>
+
+				<div class="track-meta">
+					<div class="track-details">
+						<h1 id="main-name">Не выбрано</h1>
+						<div class="genre-marquee-container" id="genre-marquee-container">
+							<p id="main-genre">Жанр не указан</p>
+						</div>
+					</div>
+					<button
+						id="main-heart-btn"
+						class="icon-btn heart-icon-btn"
+						aria-label="Избранное"
+					>
+						<i id="main-heart-icon" class="fa-regular fa-heart heart-icon"></i>
+					</button>
+				</div>
+
+				<div class="progress-box">
+					<div class="volume-slider-container">
+						<input
+							type="range"
+							id="volume-slider"
+							class="volume-slider"
+							min="0"
+							max="1"
+							step="0.01"
+							value="0.5"
+							aria-label="Громкость"
+						/>
+					</div>
+					<div class="time-stamps">
+						<span id="volume-label">Громкость: 50%</span>
+						<span>Live</span>
+					</div>
+				</div>
+
+				<div class="main-controls">
+					<button
+						id="main-prev-btn"
+						class="icon-btn step-btn"
+						aria-label="Предыдущая станция"
+					>
+						<i class="fa-solid fa-backward-step"></i>
+					</button>
+					<div
+						class="main-play-outer"
+						role="button"
+						tabindex="0"
+						id="main-play-trigger"
+						aria-label="Воспроизведение"
+					>
+						<i id="main-play-btn" class="fa-solid fa-play main-play-icon"></i>
+					</div>
+					<button
+						id="main-next-btn"
+						class="icon-btn step-btn"
+						aria-label="Следующая станция"
+					>
+						<i class="fa-solid fa-forward-step"></i>
+					</button>
+				</div>
+
+				<div class="footer-broadcasting">
+					<div>
+						<span id="broadcast-dot" class="blue-dot"></span> Live Broadcasting
+					</div>
+					<div class="mini-listeners">
+						<img
+							src="https://i.pravatar.cc/50?img=11"
+							alt="u1"
+							draggable="false"
+						/>
+						<img
+							src="https://i.pravatar.cc/50?img=12"
+							alt="u2"
+							draggable="false"
+						/>
+						<img
+							src="https://i.pravatar.cc/50?img=13"
+							alt="u3"
+							draggable="false"
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<audio id="audio-element" crossorigin="anonymous"></audio>
+		<script src="script.js"></script>
+	</body>
+</html>
